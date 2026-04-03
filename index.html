@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>仙台 MoneyGoose 懇親会 & グルメガイド</title>
+  <title>群馬→仙台 1泊2日 旅のしおり｜MoneyGoose</title>
   <style>
     :root {
       --primary: #1a3a5c;
@@ -15,6 +15,8 @@
       --tag-bg: #eef4fb;
       --tag-text: #1a3a5c;
       --border: #e8e4da;
+      --day1: #1a3a5c;
+      --day2: #2a5c3a;
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -26,11 +28,42 @@
       line-height: 1.7;
     }
 
+    /* NAV TABS */
+    .tab-nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: white;
+      border-bottom: 2px solid var(--border);
+      display: flex;
+      justify-content: center;
+      gap: 0;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    }
+    .tab-btn {
+      padding: 14px 28px;
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--sub);
+      cursor: pointer;
+      border: none;
+      background: none;
+      border-bottom: 3px solid transparent;
+      margin-bottom: -2px;
+      transition: all 0.2s;
+      white-space: nowrap;
+    }
+    .tab-btn:hover { color: var(--primary); }
+    .tab-btn.active { color: var(--primary); border-bottom-color: var(--accent); }
+
+    .tab-panel { display: none; }
+    .tab-panel.active { display: block; }
+
     /* HERO */
     .hero {
       background: linear-gradient(135deg, #0f2540 0%, #1a3a5c 60%, #2a5080 100%);
       color: white;
-      padding: 60px 24px 50px;
+      padding: 56px 24px 44px;
       text-align: center;
       position: relative;
       overflow: hidden;
@@ -45,103 +78,202 @@
       display: inline-block;
       background: var(--accent);
       color: #1a1a1a;
-      font-size: 12px;
+      font-size: 11px;
       font-weight: 700;
       letter-spacing: 0.15em;
       padding: 4px 14px;
       border-radius: 20px;
-      margin-bottom: 16px;
-      text-transform: uppercase;
+      margin-bottom: 14px;
     }
     .hero h1 {
-      font-size: clamp(24px, 5vw, 40px);
+      font-size: clamp(22px, 5vw, 38px);
       font-weight: 800;
-      margin-bottom: 10px;
-      letter-spacing: 0.02em;
+      margin-bottom: 8px;
     }
     .hero h1 span { color: var(--accent); }
-    .hero p {
-      font-size: 15px;
-      opacity: 0.8;
-      max-width: 500px;
-      margin: 0 auto;
-    }
-
-    /* SECTION */
-    .section {
-      max-width: 900px;
-      margin: 0 auto;
-      padding: 40px 20px;
-    }
-    .section-title {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      font-size: 20px;
-      font-weight: 800;
-      color: var(--primary);
-      margin-bottom: 24px;
-      padding-bottom: 12px;
-      border-bottom: 2px solid var(--accent);
-    }
-    .section-title .icon { font-size: 24px; }
+    .hero p { font-size: 14px; opacity: 0.75; }
 
     /* INFO BAR */
     .info-bar {
       background: var(--primary);
       color: white;
-      padding: 14px 20px;
+      padding: 12px 20px;
       display: flex;
       flex-wrap: wrap;
-      gap: 20px;
+      gap: 16px;
       justify-content: center;
     }
-    .info-item {
+    .info-item { display: flex; align-items: center; gap: 8px; font-size: 13px; }
+    .info-item .label { opacity: 0.6; font-size: 11px; }
+
+    /* SECTION */
+    .section {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 36px 20px;
+    }
+    .section-title {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 19px;
+      font-weight: 800;
+      color: var(--primary);
+      margin-bottom: 22px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid var(--accent);
+    }
+
+    /* DAY HEADER */
+    .day-header {
+      border-radius: 14px;
+      padding: 18px 22px;
+      margin-bottom: 20px;
+      color: white;
+    }
+    .day-header.day1 { background: linear-gradient(135deg, #1a3a5c, #2a6090); }
+    .day-header.day2 { background: linear-gradient(135deg, #1e5c3a, #2a8050); }
+    .day-header .day-label {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      opacity: 0.75;
+      margin-bottom: 4px;
+    }
+    .day-header h2 { font-size: 20px; font-weight: 800; margin-bottom: 6px; }
+    .day-header .day-sub { font-size: 13px; opacity: 0.75; }
+
+    /* TIMELINE */
+    .timeline { display: flex; flex-direction: column; }
+
+    .tl-item {
+      display: grid;
+      grid-template-columns: 72px 1fr;
+      gap: 0 14px;
+      position: relative;
+    }
+    .tl-time {
+      font-size: 14px;
+      font-weight: 800;
+      color: var(--accent);
+      text-align: right;
+      padding-top: 4px;
+      padding-bottom: 20px;
+      white-space: nowrap;
+    }
+    .tl-right {
+      padding-left: 16px;
+      border-left: 2px solid #ddd;
+      padding-bottom: 20px;
+      position: relative;
+    }
+    .tl-right::before {
+      content: '';
+      position: absolute;
+      left: -7px;
+      top: 6px;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: var(--accent);
+      border: 2px solid white;
+      box-shadow: 0 0 0 2px var(--accent);
+    }
+    .tl-item:last-child .tl-right { border-left-color: transparent; }
+
+    .tl-card {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 12px 14px;
+      box-shadow: 0 1px 6px rgba(0,0,0,0.05);
+    }
+    .tl-card .spot-name {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 3px;
+    }
+    .tl-card .spot-desc {
+      font-size: 12px;
+      color: var(--sub);
+      line-height: 1.6;
+    }
+    .tl-card .spot-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 5px;
+      margin-top: 7px;
+    }
+    .spot-tag {
+      font-size: 11px;
+      padding: 2px 8px;
+      border-radius: 12px;
+      font-weight: 600;
+    }
+    .spot-tag.blue { background: #eef4fb; color: #1a3a5c; border: 1px solid #c8daf0; }
+    .spot-tag.gold { background: #fff8e6; color: #8a6500; border: 1px solid #e8c84c; }
+    .spot-tag.green { background: #f0f8f0; color: #2a7a2a; border: 1px solid #8cc88c; }
+    .spot-tag.red { background: #fef0f0; color: #8a2020; border: 1px solid #e8a0a0; }
+    .spot-tag.party { background: #f5f0ff; color: #5a2a8a; border: 1px solid #c0a0e0; }
+
+    /* DRIVE BOX */
+    .drive-box {
+      background: #f0f4f8;
+      border: 1px dashed #aabbd0;
+      border-radius: 10px;
+      padding: 10px 14px;
+      font-size: 13px;
+      color: var(--sub);
+    }
+    .drive-box strong { color: var(--primary); }
+
+    /* CHECKLIST */
+    .checklist-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+      gap: 10px;
+      margin-top: 4px;
+    }
+    .check-item {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 10px 12px;
       display: flex;
       align-items: center;
       gap: 8px;
-      font-size: 14px;
+      font-size: 13px;
+      font-weight: 600;
     }
-    .info-item .label {
-      opacity: 0.65;
-      font-size: 12px;
-    }
-    .info-item strong { font-size: 15px; }
+    .check-item .ck { font-size: 16px; }
 
     /* RESTAURANT CARDS */
-    .card-grid {
-      display: grid;
-      gap: 20px;
-    }
-
+    .card-grid { display: grid; gap: 18px; }
     .card {
       background: var(--card);
       border: 1px solid var(--border);
       border-radius: 14px;
       overflow: hidden;
-      box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+      box-shadow: 0 2px 10px rgba(0,0,0,0.06);
       transition: transform 0.2s, box-shadow 0.2s;
     }
-    .card:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 8px 24px rgba(0,0,0,0.1);
-    }
-
+    .card:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0,0,0,0.1); }
     .card-header {
       background: linear-gradient(135deg, var(--primary) 0%, #2a5080 100%);
       color: white;
-      padding: 18px 20px 14px;
+      padding: 16px 18px 12px;
       display: flex;
       align-items: flex-start;
-      gap: 14px;
+      gap: 12px;
     }
     .card-num {
       background: var(--accent);
       color: #1a1a1a;
       font-weight: 900;
-      font-size: 18px;
-      width: 36px;
-      height: 36px;
+      font-size: 16px;
+      width: 32px;
+      height: 32px;
       border-radius: 50%;
       display: flex;
       align-items: center;
@@ -149,155 +281,79 @@
       flex-shrink: 0;
     }
     .card-title { flex: 1; }
-    .card-title h3 {
-      font-size: 20px;
-      font-weight: 800;
-      margin-bottom: 4px;
-      letter-spacing: 0.01em;
-    }
-    .card-title .subtitle {
-      font-size: 13px;
-      opacity: 0.75;
-      font-weight: 400;
-    }
-
-    .card-body {
-      padding: 18px 20px;
-    }
-
-    .card-desc {
-      font-size: 14px;
-      color: var(--text);
-      margin-bottom: 14px;
-      line-height: 1.8;
-    }
-
-    .tag-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      margin-bottom: 14px;
-    }
+    .card-title h3 { font-size: 18px; font-weight: 800; margin-bottom: 3px; }
+    .card-title .subtitle { font-size: 12px; opacity: 0.7; }
+    .card-body { padding: 16px 18px; }
+    .card-desc { font-size: 13px; color: var(--text); margin-bottom: 12px; line-height: 1.8; }
+    .tag-row { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 12px; }
     .tag {
       background: var(--tag-bg);
       color: var(--tag-text);
-      font-size: 12px;
+      font-size: 11px;
       font-weight: 600;
-      padding: 3px 10px;
-      border-radius: 20px;
+      padding: 2px 9px;
+      border-radius: 16px;
       border: 1px solid #c8daf0;
     }
-    .tag.highlight {
-      background: #fff8e6;
-      color: #8a6500;
-      border-color: #e8c84c;
-    }
-    .tag.party {
-      background: #f0f8f0;
-      color: #2a7a2a;
-      border-color: #8cc88c;
-    }
-
-    .card-links {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-    }
+    .tag.highlight { background: #fff8e6; color: #8a6500; border-color: #e8c84c; }
+    .tag.party { background: #f0f8f0; color: #2a7a2a; border-color: #8cc88c; }
+    .card-links { display: flex; flex-wrap: wrap; gap: 8px; }
     .btn {
       display: inline-flex;
       align-items: center;
-      gap: 6px;
-      padding: 8px 16px;
-      border-radius: 8px;
-      font-size: 13px;
+      gap: 5px;
+      padding: 7px 14px;
+      border-radius: 7px;
+      font-size: 12px;
       font-weight: 600;
       text-decoration: none;
       transition: opacity 0.2s;
     }
     .btn:hover { opacity: 0.8; }
-    .btn-primary {
-      background: var(--primary);
-      color: white;
-    }
-    .btn-outline {
-      background: white;
-      color: var(--primary);
-      border: 1.5px solid var(--primary);
-    }
-    .btn-accent {
-      background: var(--accent);
-      color: #1a1a1a;
-    }
-
+    .btn-primary { background: var(--primary); color: white; }
+    .btn-outline { background: white; color: var(--primary); border: 1.5px solid var(--primary); }
     .recommend-badge {
       display: inline-flex;
       align-items: center;
-      gap: 5px;
+      gap: 4px;
       background: linear-gradient(135deg, #c8a84b, #e8c86c);
       color: #1a1a1a;
-      font-size: 12px;
+      font-size: 11px;
       font-weight: 700;
-      padding: 3px 10px;
-      border-radius: 20px;
-      margin-bottom: 10px;
+      padding: 2px 9px;
+      border-radius: 16px;
+      margin-bottom: 8px;
     }
 
-    /* SCHEDULE SECTION */
-    .schedule-box {
-      background: var(--primary);
-      color: white;
-      border-radius: 14px;
-      padding: 24px;
-      margin-bottom: 30px;
-    }
-    .schedule-box h3 {
-      font-size: 17px;
-      font-weight: 700;
-      margin-bottom: 16px;
-      color: var(--accent);
-    }
-    .timeline {
-      display: flex;
-      flex-direction: column;
-      gap: 0;
-    }
-    .tl-item {
+    /* TIPS GRID */
+    .tips-grid {
       display: grid;
-      grid-template-columns: 70px 1fr;
-      gap: 12px;
-      align-items: flex-start;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 14px;
     }
-    .tl-item + .tl-item { margin-top: 12px; }
-    .tl-time {
-      font-size: 15px;
-      font-weight: 700;
-      color: var(--accent);
-      text-align: right;
-      padding-top: 2px;
+    .tip-card {
+      background: white;
+      border-radius: 12px;
+      padding: 16px;
+      border: 1px solid var(--border);
     }
-    .tl-content {
-      font-size: 14px;
-      padding-left: 12px;
-      border-left: 2px solid rgba(200,168,75,0.4);
-      padding-bottom: 12px;
-    }
-    .tl-content strong { font-size: 15px; }
-    .tl-content .note { font-size: 12px; opacity: 0.7; margin-top: 2px; }
+    .tip-card .tip-icon { font-size: 22px; margin-bottom: 7px; }
+    .tip-card h4 { font-size: 14px; font-weight: 700; margin-bottom: 6px; }
+    .tip-card p { font-size: 12px; color: var(--sub); line-height: 1.7; }
 
-    /* FOOTER */
     footer {
       background: var(--primary);
       color: white;
       text-align: center;
-      padding: 30px 20px;
+      padding: 28px 20px;
       font-size: 13px;
       opacity: 0.9;
     }
 
     @media (max-width: 600px) {
-      .hero { padding: 40px 16px 36px; }
-      .card-header { flex-direction: column; gap: 8px; }
-      .info-bar { gap: 12px; }
+      .hero { padding: 36px 16px 30px; }
+      .tab-btn { padding: 12px 16px; font-size: 12px; }
+      .tl-item { grid-template-columns: 58px 1fr; }
     }
   </style>
 </head>
@@ -305,313 +361,583 @@
 
 <!-- HERO -->
 <div class="hero">
-  <div class="hero-badge">MoneyGoose 仙台懇親会</div>
-  <h1>仙台 <span>グルメ</span> ガイド</h1>
-  <p>懇親会候補店 & 二次会・観光グルメ完全まとめ</p>
+  <div class="hero-badge">MoneyGoose 仙台遠征</div>
+  <h1>群馬→仙台 <span>1泊2日</span> 旅のしおり</h1>
+  <p>桐生・高崎 → 仙台 ／ 全スポット完全制覇プラン</p>
 </div>
 
 <!-- INFO BAR -->
 <div class="info-bar">
-  <div class="info-item">
-    <span class="label">日程</span>
-    <strong>1日目 18:00〜</strong>
-  </div>
-  <div class="info-item">
-    <span class="label">宿泊</span>
-    <strong>ウェスティンホテル仙台</strong>
-  </div>
-  <div class="info-item">
-    <span class="label">エリア</span>
-    <strong>仙台市内</strong>
-  </div>
+  <div class="info-item"><span class="label">出発</span><strong>群馬・桐生</strong></div>
+  <div class="info-item"><span class="label">ルート</span><strong>北関東道 → 東北道</strong></div>
+  <div class="info-item"><span class="label">宿泊</span><strong>ウェスティンホテル仙台</strong></div>
+  <div class="info-item"><span class="label">片道</span><strong>約280km・4時間</strong></div>
 </div>
 
-<!-- SCHEDULE -->
-<div class="section">
-  <div class="section-title">
-    <span class="icon">📅</span>
-    1日目 夜のスケジュール
-  </div>
+<!-- TABS -->
+<nav class="tab-nav">
+  <button class="tab-btn active" onclick="switchTab('day1', this)">🚗 1日目</button>
+  <button class="tab-btn" onclick="switchTab('day2', this)">🌅 2日目</button>
+  <button class="tab-btn" onclick="switchTab('party', this)">🎉 懇親会</button>
+  <button class="tab-btn" onclick="switchTab('check', this)">✅ まとめ</button>
+</nav>
 
-  <div class="schedule-box">
-    <h3>タイムライン（仙台到着日）</h3>
+<!-- ========== DAY 1 ========== -->
+<div id="panel-day1" class="tab-panel active">
+  <div class="section">
+
+    <div class="day-header day1">
+      <div class="day-label">DAY 1</div>
+      <h2>桐生 → 仙台 ／ 観光 → MoneyGoose 懇親会</h2>
+      <div class="day-sub">出発 07:30 ／ 仙台着 約12:00 ／ 懇親会 18:00〜</div>
+    </div>
+
     <div class="timeline">
+
+      <div class="tl-item">
+        <div class="tl-time">07:30</div>
+        <div class="tl-right">
+          <div class="tl-card">
+            <div class="spot-name">🚗 桐生IC 出発</div>
+            <div class="spot-desc">北関東道 → 高崎JCT → 東北道</div>
+            <div class="spot-tags">
+              <span class="spot-tag blue">高速道路</span>
+              <span class="spot-tag gold">ETC 約5,000〜6,000円</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-time">09:30</div>
+        <div class="tl-right">
+          <div class="drive-box">
+            🅿️ <strong>那須高原SA</strong>（または佐野SA）で休憩・給油
+          </div>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-time">11:45</div>
+        <div class="tl-right">
+          <div class="tl-card">
+            <div class="spot-name">📍 仙台宮城IC 到着</div>
+            <div class="spot-desc">市内へ移動（約20分）</div>
+          </div>
+        </div>
+      </div>
+
       <div class="tl-item">
         <div class="tl-time">12:00</div>
-        <div class="tl-content">
-          <strong>仙台着 → 牛タン（昼食）</strong>
-          <div class="note">利久 西口本店 or 善治郎 仙台駅前店</div>
+        <div class="tl-right">
+          <div class="tl-card">
+            <div class="spot-name">🐄 牛タン（昼食）</div>
+            <div class="spot-desc">利久 西口本店 or 善治郎 仙台駅前店<br>炭火焼き牛タン定食（テールスープ・麦飯つき）</div>
+            <div class="spot-tags">
+              <span class="spot-tag gold">仙台名物</span>
+              <span class="spot-tag blue">所要 約60分</span>
+            </div>
+          </div>
         </div>
       </div>
+
       <div class="tl-item">
-        <div class="tl-time">13:00</div>
-        <div class="tl-content">
-          <strong>仙台城跡 → 瑞鳳殿</strong>
-          <div class="note">観光 約2〜2.5時間</div>
+        <div class="tl-time">13:15</div>
+        <div class="tl-right">
+          <div class="tl-card">
+            <div class="spot-name">🏯 仙台城跡（青葉城）</div>
+            <div class="spot-desc">伊達政宗騎馬像・城址広場。仙台平野から松島方面まで見渡せる絶景。駐車場あり（有料）</div>
+            <div class="spot-tags">
+              <span class="spot-tag blue">所要 約60分</span>
+              <span class="spot-tag green">無料入場</span>
+            </div>
+          </div>
         </div>
       </div>
+
+      <div class="tl-item">
+        <div class="tl-time">14:30</div>
+        <div class="tl-right">
+          <div class="tl-card">
+            <div class="spot-name">⛩️ 瑞鳳殿</div>
+            <div class="spot-desc">伊達政宗の霊廟。桃山文化を色濃く残す豪華な建築。仙台城跡から車で約5分</div>
+            <div class="spot-tags">
+              <span class="spot-tag blue">所要 約60分</span>
+              <span class="spot-tag gold">入場料 570円</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
       <div class="tl-item">
         <div class="tl-time">16:00</div>
-        <div class="tl-content">
-          <strong>ウェスティン仙台 チェックイン</strong>
-          <div class="note">ずんだ茶寮（仙台駅構内）でひと息</div>
+        <div class="tl-right">
+          <div class="tl-card">
+            <div class="spot-name">🏨 ウェスティン仙台 チェックイン</div>
+            <div class="spot-desc">仙台駅より徒歩5分。荷物を置いてリフレッシュ</div>
+          </div>
         </div>
       </div>
+
+      <div class="tl-item">
+        <div class="tl-time">17:00</div>
+        <div class="tl-right">
+          <div class="tl-card">
+            <div class="spot-name">🍵 ずんだ茶寮（エスパル仙台店）</div>
+            <div class="spot-desc">ずんだシェイク・ずんだもちでひと息。萩の月の事前購入もここで可能</div>
+            <div class="spot-tags">
+              <span class="spot-tag gold">仙台名物スイーツ</span>
+              <span class="spot-tag green">仙台駅構内</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
       <div class="tl-item">
         <div class="tl-time">18:00</div>
-        <div class="tl-content">
-          <strong>🎉 MoneyGoose 懇親会スタート</strong>
-          <div class="note">下記候補店より選定</div>
+        <div class="tl-right">
+          <div class="tl-card">
+            <div class="spot-name">🎉 MoneyGoose 懇親会スタート</div>
+            <div class="spot-desc">「懇親会」タブから候補店を選定。片倉うに屋（時期合えば最有力）、晴れの日、DATENARI、ちょーちょむすびなど</div>
+            <div class="spot-tags">
+              <span class="spot-tag party">MoneyGoose</span>
+              <span class="spot-tag gold">要予約</span>
+            </div>
+          </div>
         </div>
       </div>
+
       <div class="tl-item">
         <div class="tl-time">21:00〜</div>
-        <div class="tl-content">
-          <strong>二次会</strong>
-          <div class="note">まぼや（ほや専門 × 日本酒飲み放題）がおすすめ</div>
+        <div class="tl-right">
+          <div class="tl-card">
+            <div class="spot-name">🌊 二次会：まぼや（ほや専門）</div>
+            <div class="spot-desc">仙台名物ほやの専門店。予約で日本酒飲み放題あり。参加者の記憶に残る体験</div>
+            <div class="spot-tags">
+              <span class="spot-tag blue">ほや専門</span>
+              <span class="spot-tag gold">日本酒飲み放題</span>
+              <span class="spot-tag green">要予約</span>
+            </div>
+          </div>
         </div>
       </div>
+
     </div>
   </div>
 </div>
 
-<!-- RESTAURANTS -->
-<div class="section" style="padding-top: 0;">
-  <div class="section-title">
-    <span class="icon">🍽️</span>
-    懇親会・二次会 候補店
-  </div>
+<!-- ========== DAY 2 ========== -->
+<div id="panel-day2" class="tab-panel">
+  <div class="section">
 
-  <div class="card-grid">
-
-    <!-- 1. 片倉うに屋 -->
-    <div class="card">
-      <div class="card-header">
-        <div class="card-num">1</div>
-        <div class="card-title">
-          <h3>片倉うに屋</h3>
-          <div class="subtitle">ウニ専門 ／ 仙台随一のウニ体験</div>
-        </div>
-      </div>
-      <div class="card-body">
-        <div class="recommend-badge">⭐ イチオシ</div>
-        <div class="card-desc">
-          仙台で最もおすすめのウニが食べられる名店。時期が合えばぜひここで懇親会を。
-          鮮度と品質は仙台屈指で、ウニ好きなら一度は訪れたい。
-          予約必須のため早めに問い合わせを。
-        </div>
-        <div class="tag-row">
-          <span class="tag">🦔 ウニ専門</span>
-          <span class="tag highlight">要予約</span>
-          <span class="tag highlight">時期限定</span>
-          <span class="tag">懇親会メイン</span>
-        </div>
-        <div class="card-links">
-          <a href="https://tabelog.com/miyagi/A0401/A040101/4016821/" target="_blank" class="btn btn-primary">食べログで見る</a>
-        </div>
-      </div>
+    <div class="day-header day2">
+      <div class="day-label">DAY 2</div>
+      <h2>仙台朝市 → 秋保大滝 → 松島（瑞巌寺・円通院）→ 帰路</h2>
+      <div class="day-sub">起床 06:00 ／ 松島発 14:30 ／ 桐生着 約19:00〜19:30</div>
     </div>
 
-    <!-- 2. 本町焼肉 DATENARI -->
-    <div class="card">
-      <div class="card-header">
-        <div class="card-num">2</div>
-        <div class="card-title">
-          <h3>本町焼肉 DATENARI</h3>
-          <div class="subtitle">花咲牛タン ／ 仙台焼肉</div>
-        </div>
-      </div>
-      <div class="card-body">
-        <div class="card-desc">
-          名物は「花咲牛タン」。仙台の牛タン文化を焼肉スタイルで楽しめるお店。
-          懇親会の盛り上がりに最適なメニュー構成。グループ利用にも対応。
-        </div>
-        <div class="tag-row">
-          <span class="tag">🥩 花咲牛タン</span>
-          <span class="tag">焼肉</span>
-          <span class="tag party">グループOK</span>
-          <span class="tag">懇親会向き</span>
-        </div>
-        <div class="card-links">
-          <a href="https://www.hotpepper.jp/strJ001266787/" target="_blank" class="btn btn-primary">ホットペッパーで見る</a>
-        </div>
-      </div>
-    </div>
+    <div class="timeline">
 
-    <!-- 3. 晴れの日 -->
-    <div class="card">
-      <div class="card-header">
-        <div class="card-num">3</div>
-        <div class="card-title">
-          <h3>晴れの日</h3>
-          <div class="subtitle">雰囲気系飲み屋 ／ パーティープラン充実</div>
+      <div class="tl-item">
+        <div class="tl-time">06:00</div>
+        <div class="tl-right">
+          <div class="tl-card">
+            <div class="spot-name">☀️ 起床・ホテル出発準備</div>
+            <div class="spot-desc">チェックアウトは後でOK。荷物を預けて身軽に出発</div>
+          </div>
         </div>
       </div>
-      <div class="card-body">
-        <div class="card-desc">
-          いい感じの雰囲気の飲み屋さん。パーティープランが充実しており、
-          グループ懇親会の定番スタイルで利用できる。落ち着いた空間で宴会向き。
-        </div>
-        <div class="tag-row">
-          <span class="tag">🍻 飲み屋</span>
-          <span class="tag party">パーティープランあり</span>
-          <span class="tag">雰囲気◎</span>
-        </div>
-        <div class="card-links">
-          <a href="https://dsgroup.co.jp/harenohi/" target="_blank" class="btn btn-primary">公式サイト</a>
-          <a href="https://tabelog.com/miyagi/A0401/A040101/4016134/party/" target="_blank" class="btn btn-outline">食べログ（宴会）</a>
-        </div>
-      </div>
-    </div>
 
-    <!-- 4. ちょーちょむすび -->
-    <div class="card">
-      <div class="card-header">
-        <div class="card-num">4</div>
-        <div class="card-title">
-          <h3>ちょーちょむすび</h3>
-          <div class="subtitle">囲炉裏 ／ 魚の串焼き</div>
+      <div class="tl-item">
+        <div class="tl-time">06:30</div>
+        <div class="tl-right">
+          <div class="tl-card">
+            <div class="spot-name">🐟 仙台朝市</div>
+            <div class="spot-desc">仙台市・連坊エリア（駅から車5分）。新鮮な海産物・野菜・惣菜が並ぶ。食べ歩きで朝食がわりに。うみのおきて（カキ100円）も朝市内</div>
+            <div class="spot-tags">
+              <span class="spot-tag blue">所要 約60分</span>
+              <span class="spot-tag gold">開場 5:00〜 混雑ピーク7:00前後</span>
+              <span class="spot-tag green">🦪 カキ100円・立ち飲みOK</span>
+            </div>
+          </div>
         </div>
       </div>
-      <div class="card-body">
-        <div class="card-desc">
-          囲炉裏を囲んで魚の串焼きを楽しめるユニークなお店。
-          非日常感のある空間で、懇親会の特別感を演出したい場合にぴったり。
-          魚介好きのグループに特におすすめ。
-        </div>
-        <div class="tag-row">
-          <span class="tag">🔥 囲炉裏</span>
-          <span class="tag">🐟 魚の串焼き</span>
-          <span class="tag highlight">特別感◎</span>
-        </div>
-        <div class="card-links">
-          <a href="https://cho-cho.net/" target="_blank" class="btn btn-primary">公式サイトで見る</a>
-        </div>
-      </div>
-    </div>
 
-    <!-- 5. まぼや（二次会） -->
-    <div class="card">
-      <div class="card-header">
-        <div class="card-num">5</div>
-        <div class="card-title">
-          <h3>まぼや</h3>
-          <div class="subtitle">ほや専門店 ／ 二次会に最適</div>
+      <div class="tl-item">
+        <div class="tl-time">08:00</div>
+        <div class="tl-right">
+          <div class="drive-box">
+            🚗 ホテルに戻りチェックアウト → 荷物を車へ
+          </div>
         </div>
       </div>
-      <div class="card-body">
-        <div class="card-desc">
-          仙台名物「ほや」の専門店という尖った個性派。予約で日本酒飲み放題あり。
-          一次会の後、二次会で訪れるのに最適。珍しい体験ができるため、
-          参加者の記憶に残る夜になること間違いなし。
-        </div>
-        <div class="tag-row">
-          <span class="tag">🌊 ほや専門</span>
-          <span class="tag highlight">日本酒飲み放題（要予約）</span>
-          <span class="tag party">二次会向き</span>
-        </div>
-        <div class="card-links">
-          <a href="https://maboya.owst.jp/" target="_blank" class="btn btn-primary">予約・詳細を見る</a>
-        </div>
-      </div>
-    </div>
 
-    <!-- 6. 牡蠣と寿司 うみのおきて -->
-    <div class="card">
-      <div class="card-header">
-        <div class="card-num">6</div>
-        <div class="card-title">
-          <h3>牡蠣と寿司 うみのおきて</h3>
-          <div class="subtitle">仙台朝市総本店 ／ カキ1個100円</div>
+      <div class="tl-item">
+        <div class="tl-time">08:30</div>
+        <div class="tl-right">
+          <div class="tl-card">
+            <div class="spot-name">🌊 秋保大滝</div>
+            <div class="spot-desc">仙台市内から車で約40分（国道48号経由・約30km）。日本の滝百選、幅6m・高さ55mの豪快な滝。滝壺まで下りるトレイルあり（往復20〜30分）。帰りに秋保温泉郷を通過</div>
+            <div class="spot-tags">
+              <span class="spot-tag blue">所要 約90分</span>
+              <span class="spot-tag green">日本の滝百選</span>
+              <span class="spot-tag gold">無料</span>
+            </div>
+          </div>
         </div>
       </div>
-      <div class="card-body">
-        <div class="card-desc">
-          カキ1個100円という驚きの価格。仙台朝市内にある海鮮の名店。
-          朝市では酒の持ち込みOKで、その場で買った食材を立ち飲みスタイルで楽しめる。
-          朝から飲むなんてことも可能という最強のロケーション。
-        </div>
-        <div class="tag-row">
-          <span class="tag">🦪 カキ1個100円</span>
-          <span class="tag highlight">朝から飲める</span>
-          <span class="tag">持込OK</span>
-          <span class="tag party">立ち飲み</span>
-        </div>
-        <div class="card-links">
-          <a href="https://sendaiasaichi.com/shop/view/49" target="_blank" class="btn btn-primary">詳細を見る</a>
-        </div>
-      </div>
-    </div>
 
-    <!-- 7. AKITA DINING なまはげ -->
-    <div class="card">
-      <div class="card-header">
-        <div class="card-num">7</div>
-        <div class="card-title">
-          <h3>AKITA DINING なまはげ仙台店</h3>
-          <div class="subtitle">秋田料理 ／ なまはげパフォーマンス</div>
+      <div class="tl-item">
+        <div class="tl-time">10:30</div>
+        <div class="tl-right">
+          <div class="drive-box">
+            🚗 秋保大滝 → 松島（約1時間）※仙台市街を経由
+          </div>
         </div>
       </div>
-      <div class="card-body">
-        <div class="card-desc">
-          秋田料理のお店だが、時間帯を合わせると「なまはげ」が飲んでいるところに
-          本物のなまはげが乱入してくるという超絶エンタメ体験ができる。
-          日本酒飲み放題も好評。仙台にいながら秋田文化を堪能できる一石二鳥な店。
-        </div>
-        <div class="tag-row">
-          <span class="tag">👹 なまはげ乱入</span>
-          <span class="tag highlight">日本酒飲み放題</span>
-          <span class="tag party">エンタメ◎</span>
-          <span class="tag">懇親会向き</span>
-        </div>
-        <div class="card-links">
-          <a href="https://namahage-sendai.owst.jp/" target="_blank" class="btn btn-primary">予約・詳細を見る</a>
-        </div>
-      </div>
-    </div>
 
+      <div class="tl-item">
+        <div class="tl-time">11:30</div>
+        <div class="tl-right">
+          <div class="tl-card">
+            <div class="spot-name">⛩️ 瑞巌寺</div>
+            <div class="spot-desc">伊達政宗が建立した禅宗寺院。杉並木の参道・本堂・洞窟遺跡群が圧巻。松島観光の中心的存在</div>
+            <div class="spot-tags">
+              <span class="spot-tag blue">所要 約45分</span>
+              <span class="spot-tag gold">入場料 700円</span>
+              <span class="spot-tag green">16:00閉門</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-time">12:20</div>
+        <div class="tl-right">
+          <div class="tl-card">
+            <div class="spot-name">🌸 円通院</div>
+            <div class="spot-desc">瑞巌寺の隣、徒歩すぐ。苔庭・バラ窓が美しい庭園。こぢんまりしているが見応えあり</div>
+            <div class="spot-tags">
+              <span class="spot-tag blue">所要 約30分</span>
+              <span class="spot-tag gold">入場料 300円</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-time">13:00</div>
+        <div class="tl-right">
+          <div class="tl-card">
+            <div class="spot-name">🍚 松島でランチ</div>
+            <div class="spot-desc">松島湾を眺めながら海鮮丼・かき料理・あなご丼。松島さかな市場周辺が便利</div>
+            <div class="spot-tags">
+              <span class="spot-tag gold">かき・海鮮丼</span>
+              <span class="spot-tag blue">所要 約60分</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-time">14:00</div>
+        <div class="tl-right">
+          <div class="tl-card">
+            <div class="spot-name">🌙 萩の月 購入</div>
+            <div class="spot-desc">菓匠三全 松島店 or 仙台駅でまとめ買い。帰り道に仙台駅に立ち寄るならそちらで</div>
+            <div class="spot-tags">
+              <span class="spot-tag gold">仙台銘菓</span>
+              <span class="spot-tag green">冷蔵不要・持ち帰り◎</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-time">14:30</div>
+        <div class="tl-right">
+          <div class="tl-card">
+            <div class="spot-name">🚗 帰路スタート</div>
+            <div class="spot-desc">松島 → 仙台宮城IC → 東北道 → 北関東道 → 桐生IC</div>
+            <div class="spot-tags">
+              <span class="spot-tag blue">所要 約4〜4.5時間</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-time">17:00</div>
+        <div class="tl-right">
+          <div class="drive-box">
+            🅿️ 那須高原SA（または佐野SA）で休憩
+          </div>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-time">19:00〜</div>
+        <div class="tl-right">
+          <div class="tl-card">
+            <div class="spot-name">🏠 桐生 帰着</div>
+            <div class="spot-desc">お疲れさまでした！</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
   </div>
 </div>
 
-<!-- TIPS -->
-<div class="section" style="padding-top: 0;">
-  <div class="section-title">
-    <span class="icon">💡</span>
-    使い方ガイド
-  </div>
+<!-- ========== PARTY ========== -->
+<div id="panel-party" class="tab-panel">
+  <div class="section">
+    <div class="section-title"><span>🎉</span> 懇親会・二次会 候補店</div>
 
-  <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px;">
-    <div style="background: white; border-radius: 12px; padding: 18px; border: 1px solid var(--border);">
-      <div style="font-size: 24px; margin-bottom: 8px;">🎯</div>
-      <div style="font-weight: 700; margin-bottom: 6px;">懇親会メイン（18:00〜）</div>
-      <div style="font-size: 13px; color: var(--sub);">
-        時期が合えば <strong>片倉うに屋</strong>が最有力。<br>
-        グループ宴会なら <strong>晴れの日</strong> or <strong>DATENARI</strong>。<br>
-        特別感重視なら <strong>ちょーちょむすび</strong>。
+    <div class="card-grid">
+
+      <div class="card">
+        <div class="card-header">
+          <div class="card-num">1</div>
+          <div class="card-title">
+            <h3>片倉うに屋</h3>
+            <div class="subtitle">ウニ専門 ／ 仙台随一のウニ体験</div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="recommend-badge">⭐ 懇親会イチオシ</div>
+          <div class="card-desc">
+            仙台で最もおすすめのウニが食べられる名店。時期が合えばぜひここで懇親会を。
+            鮮度と品質は仙台屈指。予約必須のため早めに問い合わせを。
+          </div>
+          <div class="tag-row">
+            <span class="tag">🦔 ウニ専門</span>
+            <span class="tag highlight">要予約</span>
+            <span class="tag highlight">時期限定</span>
+          </div>
+          <div class="card-links">
+            <a href="https://tabelog.com/miyagi/A0401/A040101/4016821/" target="_blank" class="btn btn-primary">食べログで見る</a>
+          </div>
+        </div>
       </div>
-    </div>
-    <div style="background: white; border-radius: 12px; padding: 18px; border: 1px solid var(--border);">
-      <div style="font-size: 24px; margin-bottom: 8px;">🌙</div>
-      <div style="font-weight: 700; margin-bottom: 6px;">二次会（21:00〜）</div>
-      <div style="font-size: 13px; color: var(--sub);">
-        <strong>まぼや</strong>（ほや専門 × 日本酒飲み放題）が鉄板。<br>
-        エンタメ重視なら <strong>なまはげ</strong> もアリ。
+
+      <div class="card">
+        <div class="card-header">
+          <div class="card-num">2</div>
+          <div class="card-title">
+            <h3>本町焼肉 DATENARI</h3>
+            <div class="subtitle">花咲牛タン ／ 仙台焼肉</div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="card-desc">
+            名物は「花咲牛タン」。仙台の牛タン文化を焼肉スタイルで楽しめる。
+            グループ宴会向きのメニュー構成。
+          </div>
+          <div class="tag-row">
+            <span class="tag">🥩 花咲牛タン</span>
+            <span class="tag party">グループOK</span>
+          </div>
+          <div class="card-links">
+            <a href="https://www.hotpepper.jp/strJ001266787/" target="_blank" class="btn btn-primary">ホットペッパーで見る</a>
+          </div>
+        </div>
       </div>
+
+      <div class="card">
+        <div class="card-header">
+          <div class="card-num">3</div>
+          <div class="card-title">
+            <h3>晴れの日</h3>
+            <div class="subtitle">雰囲気系飲み屋 ／ パーティープラン充実</div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="card-desc">
+            いい感じの雰囲気の飲み屋。パーティープランが充実しており、
+            落ち着いた空間でグループ宴会向き。
+          </div>
+          <div class="tag-row">
+            <span class="tag">🍻 飲み屋</span>
+            <span class="tag party">パーティープランあり</span>
+            <span class="tag">雰囲気◎</span>
+          </div>
+          <div class="card-links">
+            <a href="https://dsgroup.co.jp/harenohi/" target="_blank" class="btn btn-primary">公式サイト</a>
+            <a href="https://tabelog.com/miyagi/A0401/A040101/4016134/party/" target="_blank" class="btn btn-outline">食べログ（宴会）</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <div class="card-num">4</div>
+          <div class="card-title">
+            <h3>ちょーちょむすび</h3>
+            <div class="subtitle">囲炉裏 ／ 魚の串焼き</div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="card-desc">
+            囲炉裏を囲んで魚の串焼きを楽しめる個性的なお店。
+            非日常感のある空間で懇親会の特別感を演出。
+          </div>
+          <div class="tag-row">
+            <span class="tag">🔥 囲炉裏</span>
+            <span class="tag">🐟 魚の串焼き</span>
+            <span class="tag highlight">特別感◎</span>
+          </div>
+          <div class="card-links">
+            <a href="https://cho-cho.net/" target="_blank" class="btn btn-primary">公式サイトで見る</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <div class="card-num">5</div>
+          <div class="card-title">
+            <h3>まぼや</h3>
+            <div class="subtitle">ほや専門店 ／ 二次会に最適</div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="recommend-badge">🌙 二次会イチオシ</div>
+          <div class="card-desc">
+            仙台名物「ほや」の専門店。予約で日本酒飲み放題あり。
+            珍しい体験で参加者の記憶に残る夜に。
+          </div>
+          <div class="tag-row">
+            <span class="tag">🌊 ほや専門</span>
+            <span class="tag highlight">日本酒飲み放題（要予約）</span>
+            <span class="tag party">二次会向き</span>
+          </div>
+          <div class="card-links">
+            <a href="https://maboya.owst.jp/" target="_blank" class="btn btn-primary">予約・詳細を見る</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <div class="card-num">6</div>
+          <div class="card-title">
+            <h3>牡蠣と寿司 うみのおきて</h3>
+            <div class="subtitle">仙台朝市総本店 ／ カキ1個100円</div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="card-desc">
+            カキ1個100円という驚価格。朝市内にあり酒の持ち込みOK。
+            朝から立ち飲みスタイルで楽しめる最強ロケーション。2日目の朝市訪問時に。
+          </div>
+          <div class="tag-row">
+            <span class="tag">🦪 カキ1個100円</span>
+            <span class="tag highlight">朝から飲める</span>
+            <span class="tag">持込OK・立ち飲み</span>
+          </div>
+          <div class="card-links">
+            <a href="https://sendaiasaichi.com/shop/view/49" target="_blank" class="btn btn-primary">詳細を見る</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <div class="card-num">7</div>
+          <div class="card-title">
+            <h3>AKITA DINING なまはげ仙台店</h3>
+            <div class="subtitle">秋田料理 ／ なまはげパフォーマンス</div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="card-desc">
+            時間帯を合わせると「なまはげ」が席に乱入してくるエンタメ体験。
+            日本酒飲み放題も好評。仙台にいながら秋田文化を堪能。
+          </div>
+          <div class="tag-row">
+            <span class="tag">👹 なまはげ乱入</span>
+            <span class="tag highlight">日本酒飲み放題</span>
+            <span class="tag party">エンタメ◎</span>
+          </div>
+          <div class="card-links">
+            <a href="https://namahage-sendai.owst.jp/" target="_blank" class="btn btn-primary">予約・詳細を見る</a>
+          </div>
+        </div>
+      </div>
+
     </div>
-    <div style="background: white; border-radius: 12px; padding: 18px; border: 1px solid var(--border);">
-      <div style="font-size: 24px; margin-bottom: 8px;">🌅</div>
-      <div style="font-weight: 700; margin-bottom: 6px;">2日目 朝（〜8:00）</div>
-      <div style="font-size: 13px; color: var(--sub);">
-        <strong>うみのおきて</strong> × <strong>仙台朝市</strong>で朝から海鮮三昧。酒持参で立ち飲みも可能。
+  </div>
+</div>
+
+<!-- ========== CHECKLIST ========== -->
+<div id="panel-check" class="tab-panel">
+  <div class="section">
+    <div class="section-title"><span>✅</span> 全スポット達成チェック</div>
+
+    <div class="checklist-grid" style="margin-bottom: 32px;">
+      <div class="check-item"><span class="ck">🐄</span> 牛タン</div>
+      <div class="check-item"><span class="ck">🏯</span> 仙台城跡</div>
+      <div class="check-item"><span class="ck">⛩️</span> 瑞鳳殿</div>
+      <div class="check-item"><span class="ck">🍵</span> ずんだ茶寮</div>
+      <div class="check-item"><span class="ck">🐟</span> 仙台朝市</div>
+      <div class="check-item"><span class="ck">🌊</span> 秋保大滝</div>
+      <div class="check-item"><span class="ck">⛩️</span> 瑞巌寺</div>
+      <div class="check-item"><span class="ck">🌸</span> 円通院</div>
+      <div class="check-item"><span class="ck">🌙</span> 萩の月</div>
+      <div class="check-item"><span class="ck">🎉</span> 懇親会</div>
+    </div>
+
+    <div class="section-title"><span>💡</span> 旅のポイント</div>
+
+    <div class="tips-grid">
+      <div class="tip-card">
+        <div class="tip-icon">🚗</div>
+        <h4>ルートの注意</h4>
+        <p>秋保大滝（南西）と松島（北東）は仙台を挟んで逆方向。Day2は秋保→仙台→松島の順で移動約1時間ずつ。</p>
+      </div>
+      <div class="tip-card">
+        <div class="tip-icon">🌅</div>
+        <h4>朝市は早めに</h4>
+        <p>仙台朝市は5:00開場。混雑ピークは7:00前後。新鮮な魚介の食べ歩き＋カキ立ち飲みは早起きした人の特権。</p>
+      </div>
+      <div class="tip-card">
+        <div class="tip-icon">⛩️</div>
+        <h4>瑞巌寺の閉門</h4>
+        <p>瑞巌寺は16:00閉門（季節変動あり）。松島到着は遅くとも15:00まで。</p>
+      </div>
+      <div class="tip-card">
+        <div class="tip-icon">🌊</div>
+        <h4>まぼやは要予約</h4>
+        <p>日本酒飲み放題は予約時に申し込みが必要。懇親会と同日なので早めに押さえること。</p>
+      </div>
+      <div class="tip-card">
+        <div class="tip-icon">🌙</div>
+        <h4>萩の月の購入タイミング</h4>
+        <p>仙台駅エスパル店が便利。ずんだ茶寮に行くついでにまとめ買い推奨。冷蔵不要で持ち帰りしやすい。</p>
+      </div>
+      <div class="tip-card">
+        <div class="tip-icon">🎉</div>
+        <h4>懇親会の優先順位</h4>
+        <p>時期が合えば片倉うに屋が最有力。グループ宴会なら晴れの日・DATENARI。特別感なら囲炉裏のちょーちょむすび。</p>
       </div>
     </div>
   </div>
 </div>
 
 <footer>
-  <p>MoneyGoose 仙台懇親会 グルメガイド</p>
+  <p>群馬→仙台 1泊2日 旅のしおり｜MoneyGoose 懇親会</p>
   <p style="margin-top:6px; font-size:12px; opacity:0.6;">Generated for MoneyGoose members</p>
 </footer>
+
+<script>
+  function switchTab(id, btn) {
+    document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.getElementById('panel-' + id).classList.add('active');
+    btn.classList.add('active');
+  }
+</script>
 
 </body>
 </html>
